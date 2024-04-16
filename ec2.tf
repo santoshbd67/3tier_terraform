@@ -17,19 +17,6 @@ resource "aws_instance" "web" {
     Name = "WebServer"
   }
 
-  provisioner "file" {
-    source = "./pswain.pem"
-    destination = "/home/ec2-user/pswain.pem"
-  
-    connection {
-      type = "ssh"
-      host = self.public_ip
-      user = "ec2-user"
-      private_key = "${file("./pswain.pem")}"
-    }  
-  }
-}
-
 resource "aws_instance" "db" {
   ami           = "ami-08df646e18b182346"
   instance_type = "t2.micro"
